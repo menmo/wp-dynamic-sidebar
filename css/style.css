@@ -1,0 +1,69 @@
+#dynamic-sidebar tr {
+    height: 40px;
+}
+#dynamic-sidebar td {
+    vertical-align: middle;
+}
+#dynamic-sidebar th.name {
+    width: 15%;
+}
+#dynamic-sidebar th.shortcode {
+    width: 30%;
+}
+#dynamic-sidebar th.description {
+    width: 40%;
+}
+#dynamic-sidebar th.action {
+    width: 15%;
+}
+#new-sidebar label {
+    display: inline-block;
+    width: 125px;
+    vertical-align: top;
+}
+#new-sidebar label span {
+    float: right;
+    padding-right: 10px;
+    color: red;
+}
+#new-sidebar input, #new-sidebar textarea {
+    width: 65%;
+}
+#new-sidebar input {
+    height: 30px
+}
+#new-sidebar textarea {
+    height: 45px
+}
+#new-sidebar .button {
+    width: auto;
+}
+.wrap-dynamic-sidebar .col-1 {
+    float: left;
+    width: 40%;
+}
+.wrap-dynamic-sidebar .col-2 {
+    float: right;
+    width: 60%;
+}
+#response {
+    margin-left: 26px;
+}
+#response.loader {
+    background-image: url('../images/ajax-loader.gif');
+    width: 16px;
+    height: 11px;
+    display: inline-block;
+}
+#popuup_message {
+    display: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border-color: #ccc;
+    border-style: solid;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 100;
+    background-color: #f1f1f1;
+}
