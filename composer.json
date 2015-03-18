@@ -1,0 +1,12 @@
+{
+    "name": "menmo/wp-dynamic-sidebar",
+    "description": "Dynamic sidebars",
+    "keywords": ["sidebar", "dynamic"],
+    "type": "wordpress-plugin",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@git.menmo.se:menmo/wp-dynamic-sidebar.git"
+        }
+    ]
+}
