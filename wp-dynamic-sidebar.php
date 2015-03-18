@@ -50,16 +50,16 @@ function wp_dynamic_sidebar_func() {
             <form id="new-sidebar">
                 <p>
                     <label for="sidebar_name">Sidebar Name <span>*</span></label>
-                    <input type="text" class="text-box" placeholder="Unique Sidebar Name" id="sidebar_name" name="sidebar_name" />
+                    <input type="text" class="text-box reset" placeholder="Unique Sidebar Name" id="sidebar_name" name="sidebar_name" />
                 </p>
                 <p>
                     <label for="sidebar_desc">Description <span>*</span></label>
-                    <textarea class="text-area" placeholder="Sidebar Description" id="sidebar_desc" name="sidebar_desc"></textarea>
+                    <textarea class="text-area reset" placeholder="Sidebar Description" id="sidebar_desc" name="sidebar_desc"></textarea>
                 </p>
                 <?php
 
                 $defaultConfig = array(
-                    'show_config' => 'hidden',
+                    'show_config' => 'hidden2',
                     'before_widget' => '<li id="%1$s" class="widget %2$s">',
                     'after_widget'  => '</li>',
                     'before_title'  => '<h2 class="widgettitle">',

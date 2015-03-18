@@ -18,7 +18,11 @@ function fnDeSelect() {
 }
 
 jQuery(document).ready(function($) {
-    
+
+    function resetForm() {
+        $("#new-sidebar input[type=text].reset, #new-sidebar textarea.reset").val("");
+    }
+
     $('#add-new-sidebar').live('click', function() {
         $('#response').html('');
         $('#response').addClass('loader');
@@ -35,7 +39,7 @@ jQuery(document).ready(function($) {
                 } else {
                     $('#dynamic-sidebar tbody').prepend(response).hide().fadeIn('slow');
                     $('#response').html('Data saved.');
-                    $("#new-sidebar input[type=text], #new-sidebar textarea").val("");
+                    resetForm();
                     if($('#dynamic-sidebar tbody tr').hasClass('no-sidebar')) {
                         $('#dynamic-sidebar tbody tr.no-sidebar').remove();
                     }
@@ -99,7 +103,7 @@ jQuery(document).ready(function($) {
                         value: 'Add Sidebar'
                     });
                     $('.wrap-dynamic-sidebar form input[type=button]').removeAttr('data-id');
-                    $("#new-sidebar input[type=text], #new-sidebar textarea").val("");
+                    resetForm()
                     $('#response').html('Sidebar successfully updated.');
                 }
             });
@@ -113,7 +117,7 @@ jQuery(document).ready(function($) {
             value: 'Add Sidebar'
         });
         $('.wrap-dynamic-sidebar form input[type=button]').removeAttr('data-id');
-        $("#new-sidebar input[type=text], #new-sidebar textarea").val("");
+        resetForm();
     });
     
     $('.delete-dynamic-sidebar').live('click', function() {
