@@ -59,7 +59,7 @@ function wp_dynamic_sidebar_func() {
                 <?php
 
                 $defaultConfig = array(
-                    'show_config' => 'hidden2',
+                    'show_config' => 'hidden',
                     'before_widget' => '<li id="%1$s" class="widget %2$s">',
                     'after_widget'  => '</li>',
                     'before_title'  => '<h2 class="widgettitle">',
