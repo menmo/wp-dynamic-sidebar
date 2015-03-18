@@ -56,26 +56,44 @@ function wp_dynamic_sidebar_func() {
                     <label for="sidebar_desc">Description <span>*</span></label>
                     <textarea class="text-area" placeholder="Sidebar Description" id="sidebar_desc" name="sidebar_desc"></textarea>
                 </p>
-                <p>
-                    <label for="sidebar_class">Class</label>
-                    <input type="text" class="text-box" placeholder="CSS Class Name" id="sidebar_class" name="sidebar_class" />
-                </p>
-                <p>
-                    <label for="sidebar_before_widget">Before Widget <span>*</span></label>
-                    <textarea class="text-area" placeholder="&lt;li id=&#34;%1$s&#34; class=&#34;widget %2$s&#34;&gt;" id="sidebar_before_widget" name="sidebar_before_widget"></textarea>
-                </p>
-                <p>
-                    <label for="sidebar_after_widget">After Widget <span>*</span></label>
-                    <textarea class="text-area" placeholder="&lt;/li&gt;" id="sidebar_after_widget" name="sidebar_after_widget"></textarea>
-                </p>
-                <p>
-                    <label for="sidebar_before_title">Before Title <span>*</span></label>
-                    <textarea class="text-area" placeholder="&lt;h2 class=&#34;widgettitle&#34;&gt" id="sidebar_before_title" name="sidebar_before_title"></textarea>
-                </p>
-                <p>
-                    <label for="sidebar_after_title">After Title <span>*</span></label>
-                    <textarea class="text-area" placeholder="&lt;/h2&gt" id="sidebar_after_title" name="sidebar_after_title"></textarea>
-                </p>
+                <?php
+
+                $defaultConfig = array(
+                    'show_config' => 'hidden',
+                    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+                    'after_widget'  => '</li>',
+                    'before_title'  => '<h2 class="widgettitle">',
+                    'after_title'   => '</h2>',
+                );
+
+                $config = array_merge($defaultConfig, apply_filters('wp_dynamic_sidebar_config', $defaultConfig));
+
+                if($config['show_config'] == 'hidden'): ?>
+                    <div style="display: none">
+                <?php else:?>
+                    <div>
+                <?php endif?>
+                    <p>
+                        <label for="sidebar_class">Class</label>
+                        <input type="text" class="text-box" placeholder="CSS Class Name" id="sidebar_class" name="sidebar_class" />
+                    </p>
+                    <p>
+                        <label for="sidebar_before_widget">Before Widget <span>*</span></label>
+                        <textarea class="text-area" id="sidebar_before_widget" name="sidebar_before_widget"><?= $config['before_widget']?></textarea>
+                    </p>
+                    <p>
+                        <label for="sidebar_after_widget">After Widget <span>*</span></label>
+                        <textarea class="text-area" id="sidebar_after_widget" name="sidebar_after_widget"><?= $config['after_widget']?></textarea>
+                    </p>
+                    <p>
+                        <label for="sidebar_before_title">Before Title <span>*</span></label>
+                        <textarea class="text-area" id="sidebar_before_title" name="sidebar_before_title"><?= $config['before_title']?></textarea>
+                    </p>
+                    <p>
+                        <label for="sidebar_after_title">After Title <span>*</span></label>
+                        <textarea class="text-area" id="sidebar_after_title" name="sidebar_after_title"><?= $config['after_title']?></textarea>
+                    </p>
+                </div>
                 <input class="button" type="button" id="add-new-sidebar" value="Add Sidebar" />
                 <span id="response"></span>
             </form>
