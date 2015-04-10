@@ -113,7 +113,7 @@ function wp_dynamic_sidebar_func() {
                     <?php
                     $sidebars = array();
                     if(get_option('wp-dynamic-sidebar-settings')) {
-                        $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+                        $sidebars = get_option('wp-dynamic-sidebar-settings');
                     }
                     if (count($sidebars) > 0) {
                         $counter = 0;
@@ -178,7 +178,7 @@ function save_wp_dynamic_sidebar_callback() {
         )
     );
     if (get_option('wp-dynamic-sidebar-settings')) {
-        $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+        $sidebars = get_option('wp-dynamic-sidebar-settings');
         foreach($sidebars as $key => $sidebar) {
             if( $sidebar['id'] === $s_id ) {
                die('Insert unique sidebar.');
@@ -187,12 +187,7 @@ function save_wp_dynamic_sidebar_callback() {
         $data = array_merge($data, $sidebars);
     }
     //print_pre($data); die;
-    $serialize = serialize($data);
-    if (get_option('wp-dynamic-sidebar-settings')) {
-        update_option('wp-dynamic-sidebar-settings', $serialize);
-    } else {
-        add_option('wp-dynamic-sidebar-settings', $serialize, '', 'yes');
-    }
+    update_option('wp-dynamic-sidebar-settings', $data);
     die('<tr class="alternate"><td class="name"><strong>'.$s_name.'</strong></td><td class="shortcode"><div id="'.$s_id.'" onclick="fnSelect(\''.$s_id.'\')">[wp-dynamic-sidebar id="'.$s_id.'"]</div></td><td class="description">'.$s_desc.'</td><td class="action"><a href="javascript:void(0);" class="edit-dynamic-sidebar" data-id="'.$s_id.'">Edit</a> | <a href="javascript:void(0);" data-id="'.$s_id.'" class="delete-dynamic-sidebar">Delete</a></td></tr>');
 }
 
@@ -209,7 +204,7 @@ function update_wp_dynamic_sidebar_callback() {
         die('* fields are mandatory.');
     }
     if (get_option('wp-dynamic-sidebar-settings')) {
-        $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+        $sidebars = get_option('wp-dynamic-sidebar-settings');
         //print_pre($sidebars);
         foreach($sidebars as $key => $sidebar) {
             if( $sidebar['id'] === $c_id ) {
@@ -238,8 +233,7 @@ function update_wp_dynamic_sidebar_callback() {
         //print_pre($data);
         $new_data = array_replace($sidebars, $data);
         //print_pre($new_data);
-        $serialize = serialize($new_data);
-        update_option('wp-dynamic-sidebar-settings', $serialize);
+        update_option('wp-dynamic-sidebar-settings', $new_data);
         die('<td class="name"><strong>'.$c_name.'</strong></td><td class="shortcode"><div id="'.$c_id.'" onclick="fnSelect(\''.$c_id.'\')">[wp-dynamic-sidebar id="'.$c_id.'"]</div></td><td class="description">'.$c_desc.'</td><td class="action"><a href="javascript:void(0);" class="edit-dynamic-sidebar" data-id="'.$c_id.'">Edit</a> | <a href="javascript:void(0);" data-id="'.$c_id.'" class="delete-dynamic-sidebar">Delete</a></td>');
     }
     die;
@@ -250,7 +244,7 @@ add_action('wp_ajax_nopriv_edit_wp_dynamic_sidebar', 'edit_wp_dynamic_sidebar_ca
 
 function edit_wp_dynamic_sidebar_callback() {
     $s_id = $_POST['sidebar_id'];
-    $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+    $sidebars = get_option('wp-dynamic-sidebar-settings');
     foreach($sidebars as $key => $sidebar) {
         $current_key = $key;
         if( $sidebar['id'] === $s_id ) {
@@ -266,7 +260,7 @@ add_action('wp_ajax_nopriv_delete_wp_dynamic_sidebar', 'delete_wp_dynamic_sideba
 
 function delete_wp_dynamic_sidebar_callback() {
     $s_id = $_POST['sidebar_id'];
-    $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+    $sidebars = get_option('wp-dynamic-sidebar-settings');
     foreach($sidebars as $key => $sidebar) {
         if( $sidebar['id'] === $s_id ) {
             $current_key = $key;
@@ -275,15 +269,14 @@ function delete_wp_dynamic_sidebar_callback() {
     }
     unset($sidebars[$current_key]);
     $sidebars = array_values($sidebars);
-    $serialize = serialize($sidebars);
-    update_option('wp-dynamic-sidebar-settings', $serialize);
+    update_option('wp-dynamic-sidebar-settings', $sidebars);
     die('Successfully deleted.');
 }
 
 function wp_dynamic_sidebar_generate() {
     $sidebars = array();
     if(get_option('wp-dynamic-sidebar-settings')) {
-        $sidebars = unserialize( get_option('wp-dynamic-sidebar-settings') );
+        $sidebars = get_option('wp-dynamic-sidebar-settings');
     }
     //print_pre($sidebars);
     foreach($sidebars as $key => $sidebar) {
