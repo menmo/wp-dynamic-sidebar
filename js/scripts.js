@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
         $("#new-sidebar input[type=text].reset, #new-sidebar textarea.reset").val("");
     }
 
-    $('#add-new-sidebar').live('click', function() {
+    $(document).on('click', '#add-new-sidebar', function() {
         $('#response').html('');
         $('#response').addClass('loader');
         var serial = $('#new-sidebar').serialize();
@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $('.edit-dynamic-sidebar').live('click', function() {
+    $(document).on('click', '.edit-dynamic-sidebar', function() {
         if($('#new-sidebar #update-new-sidebar').length > 0) {
             popup_message('Update or Cancel editing Dynamic Sidebar to Edit.')
             return false;
@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $('#update-new-sidebar').live('click', function() {
+    $(document).on('click', '#update-new-sidebar', function() {
         $('#response').html('');
         $('#response').addClass('loader');
         var id = $(this).attr('data-id');
@@ -110,7 +110,7 @@ jQuery(document).ready(function($) {
         return false;
     });
     
-    $('#cancel-update-new-sidebar').live('click', function() {
+    $(document).on('click', '#cancel-update-new-sidebar', function() {
         $("#cancel-update-new-sidebar").remove();
         $('.wrap-dynamic-sidebar form input[type=button]').attr({
             id: 'add-new-sidebar',
@@ -120,7 +120,7 @@ jQuery(document).ready(function($) {
         resetForm();
     });
     
-    $('.delete-dynamic-sidebar').live('click', function() {
+    $(document).on('click', '.delete-dynamic-sidebar', function() {
         if($('#new-sidebar #update-new-sidebar').length > 0) {
             popup_message('Update or Cancel editing Dynamic Sidebar to Delete.')
             return false;
