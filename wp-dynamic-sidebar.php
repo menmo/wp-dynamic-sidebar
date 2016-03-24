@@ -39,6 +39,18 @@ function wp_dynamic_sidebar_admin_styles() {
     wp_enqueue_style('sidebar-styles', plugins_url( '/css/style.css' , __FILE__ ), false, false, 'screen');
 }
 
+function wp_dynamic_sidebar_get_config() {
+    $defaultConfig = array(
+        'show_config' => 'hidden',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</li>',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
+    );
+
+    return array_merge($defaultConfig, apply_filters('wp_dynamic_sidebar_config', $defaultConfig));
+}
+
 function wp_dynamic_sidebar_func() {
     ?>
     <div class="wrap wrap-dynamic-sidebar">
@@ -58,15 +70,7 @@ function wp_dynamic_sidebar_func() {
                 </p>
                 <?php
 
-                $defaultConfig = array(
-                    'show_config' => 'hidden',
-                    'before_widget' => '<li id="%1$s" class="widget %2$s">',
-                    'after_widget'  => '</li>',
-                    'before_title'  => '<h2 class="widgettitle">',
-                    'after_title'   => '</h2>',
-                );
-
-                $config = array_merge($defaultConfig, apply_filters('wp_dynamic_sidebar_config', $defaultConfig));
+                $config = wp_dynamic_sidebar_get_config();
 
                 if($config['show_config'] == 'hidden'): ?>
                     <div style="display: none">
@@ -277,19 +281,29 @@ function wp_dynamic_sidebar_generate() {
     $sidebars = array();
     if(get_option('wp-dynamic-sidebar-settings')) {
         $sidebars = get_option('wp-dynamic-sidebar-settings');
+        $config = wp_dynamic_sidebar_get_config();
     }
     //print_pre($sidebars);
     foreach($sidebars as $key => $sidebar) {
-        register_sidebar(array(
+        $args = array(
             'name' => $sidebar['name'],
             'id' => $sidebar['id'],
-            'description' => $sidebar['description'],
-            'class' => $sidebar['class'],
-            'before_widget' => html_entity_decode($sidebar['before_widget']),
-            'after_widget' => html_entity_decode($sidebar['after_widget']),
-            'before_title' => html_entity_decode($sidebar['before_title']),
-            'after_title' => html_entity_decode($sidebar['after_title']),
-        ));
+            'description' => $sidebar['description']
+        );
+
+        if($config['show_config'] == 'hidden') {
+            $args = array_merge($args, $config);
+        } else {
+            $args = array_merge($args, array(
+                'class' => $sidebar['class'],
+                'before_widget' => html_entity_decode($sidebar['before_widget']),
+                'after_widget' => html_entity_decode($sidebar['after_widget']),
+                'before_title' => html_entity_decode($sidebar['before_title']),
+                'after_title' => html_entity_decode($sidebar['after_title']),
+            ));
+        }
+
+        register_sidebar($args);
     }
 }
 
