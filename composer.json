@@ -6,7 +6,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@git.menmo.se:menmo/wp-dynamic-sidebar.git"
+            "url": "git@github.com:menmo/wp-dynamic-sidebar.git"
         }
     ]
 }
